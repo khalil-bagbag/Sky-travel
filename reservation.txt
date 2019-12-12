@@ -1,0 +1,8 @@
+2 05497347 Azur_hotel Tunis 5 1 1 2019 8 6 7200 
+4 152548 Azur_hotel Tunis 5 32767 0 0 1 1 150 
+6 05497347 Ibis_hotel Djerba 3 1 1 2019 1 1 100 
+7 05497347 Ibis_hotel Djerba 3 1 1 2019 1 1 100 
+10 05497347 Azur_hotel Tunis 5 1 1 2019 5 1 600 
+13 05497347 Plazza Tunis 5 3 3 2019 7 3 3780 
+14 05497347 Ibis_hotel Djerba 3 4 4 2019 1 1 100 
+15 07462412 Ibis_hotel Djerba 3 12 4 2019 3 2 600 

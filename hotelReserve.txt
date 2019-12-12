@@ -1,0 +1,6 @@
+Azur_hotel Tunis 5 150 1 12 
+Plazza Tunis 5 180 44 4 
+Palm_beach_hotel Hammamet 3 100 2 6 
+Laico_hotel Sousse 4 120 3 40 
+Ibis_hotel Djerba 3 100 4 8 
+Garden_hotel Sousse 4 120 5 43 
