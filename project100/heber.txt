@@ -1,0 +1,5 @@
+Hammamet Khella 3 10 2 10
+Tunis Cigale 2 10 8 10
+Hammamet Cigale 4 10 8 10
+Hammamet Cigale 4 10 8 10
+Tunis Cigale 4 10 8 10
