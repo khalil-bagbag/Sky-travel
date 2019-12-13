@@ -7,315 +7,242 @@
 #include "callbacks.h"
 #include "interface.h"
 #include "support.h"
-#include "agent.h"
+#include "fonction.h"
 #include <string.h>
+#include <stdio.h>
+
+
 void
-cmon_ajouter_clicked                     (GtkWidget       *objet,
+tbon_ajouter_v_clicked                   (GtkWidget       *objet_graphique,
                                         gpointer         user_data)
 {
+GtkWidget *Comboboxv;
+GtkWidget *spinbutton1;
+GtkWidget *entryi;
+GtkWidget *spinbutton3;
 
-agent p;
-GtkWidget *input1,*input2,*input3,*input4,*input5;
-GtkWidget *cmfenetre_ajout;
-GtkWidget *cmcombobox1;
-cmfenetre_ajout=lookup_widget(objet,"cmfenetre_ajout");
-input1=lookup_widget(objet,"cmnom");
-input2=lookup_widget(objet,"cmprenom");
-input3=lookup_widget(objet,"cmdate");
-input4=lookup_widget(objet,"cmcin");
-input5=lookup_widget(objet,"cmid");
-cmcombobox1=lookup_widget(objet,"cmcombobox1");
-strcpy(p.nom,gtk_entry_get_text(GTK_ENTRY(input1)));
-strcpy(p.prenom,gtk_entry_get_text(GTK_ENTRY(input2)));
-strcpy(p.date_recrut,gtk_entry_get_text(GTK_ENTRY(input3)));
-strcpy(p.cin,gtk_entry_get_text(GTK_ENTRY(input4)));
-strcpy(p.id,gtk_entry_get_text(GTK_ENTRY(input5)));
-char domaine[30];
-strcpy(p.domaine,gtk_combo_box_get_active_text(GTK_COMBO_BOX(cmcombobox1)));
+GtkWidget *Comboboxh;
+GtkWidget *Comboboxe;
+GtkWidget *sortie;
+GtkWidget *sortie1;
+heber p;
+char ids[10];
+int k;
 
-ajouter_agent(p);
 
+Comboboxv=lookup_widget(objet_graphique,"tbcomboboxv");
+sortie=lookup_widget(objet_graphique,"tblabel_7");
+sortie1=lookup_widget(objet_graphique,"tblabel9km");
+spinbutton1=lookup_widget(objet_graphique,"tbspinbutton1");
+entryi=lookup_widget(objet_graphique,"tbentryi");
+strcpy(ids,gtk_entry_get_text(GTK_ENTRY(entryi)));
+spinbutton3=lookup_widget(objet_graphique,"tbspinbutton3");
+
+Comboboxh=lookup_widget(objet_graphique,"tbcomboboxh");
+Comboboxe=lookup_widget(objet_graphique,"tbcomboboxe");
+p.prix=gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (spinbutton1));
+strcpy(p.id,gtk_entry_get_text(GTK_ENTRY(entryi)));
+p.resv=gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (spinbutton3));
+
+strcpy(p.ville,gtk_combo_box_get_active_text(GTK_COMBO_BOX(Comboboxv)));
+
+
+strcpy(p.hotel,gtk_combo_box_get_active_text(GTK_COMBO_BOX(Comboboxh)));
+
+strcpy(p.etoile,gtk_combo_box_get_active_text(GTK_COMBO_BOX(Comboboxe)));
+k=verifier_id(ids);
+if(k==0)
+{
+gtk_label_set_text(GTK_LABEL(sortie1),"veuiller choisir un autre id");
+return(0);
 }
-
-
-
-void
-cmon_afficher_clicked                    (GtkWidget       *objet,
-                                        gpointer         user_data)
+if(k!=0)
 {
-GtkWidget *cmfenetre_ajout;
-GtkWidget *cmfenetre_afficher;
-GtkWidget *cmtreeview1;
-
-cmfenetre_ajout=lookup_widget(objet,"cmfenetre_ajout");
-
-
-gtk_widget_destroy(cmfenetre_ajout);
-cmfenetre_afficher=lookup_widget(objet,"cmfenetre_afficher");
-cmfenetre_afficher=create_cmfenetre_afficher();
-gtk_widget_show(cmfenetre_afficher);
-cmtreeview1 =lookup_widget(cmfenetre_afficher,"cmtreeview1");
-afficher_agent(cmtreeview1);
+ajouter_heber(p);
+gtk_label_set_text(GTK_LABEL(sortie),"ajoutation réussite");
 }
-
-
-void
-cmon_retour_clicked                      (GtkWidget      *objet,
-                                        gpointer         user_data)
-{
-GtkWidget *cmfenetre_ajout,*cmfenetre_afficher;
-cmfenetre_afficher=lookup_widget(objet,"cmfenetre_afficher");
-
-gtk_widget_destroy(cmfenetre_afficher);
-cmfenetre_ajout=create_cmfenetre_ajout();
-gtk_widget_show(cmfenetre_ajout);
 }
 
 
 void
-cmon_supprimer_clicked                   (GtkWidget      *objet,
-                                        gpointer         selection)
-{
-GtkWidget *cmfenetre_afficher;
-GtkWidget *cmtreeview1;
-cmfenetre_afficher=lookup_widget(objet,"cmfenetre_afficher");
-cmtreeview1 =lookup_widget(cmfenetre_afficher,"cmtreeview1");
-supprimer(cmtreeview1);
-}
-
-
-void
-cmon_modifier_clicked                    (GtkWidget       *objet,
+tbon_modifier_v_clicked                  (GtkWidget       *objet,
                                         gpointer         user_data)
 {
-GtkWidget *cmwindow3;
-GtkWidget *cmfenetre_afficher;
+heber p;
 
-cmfenetre_afficher=lookup_widget(objet,"cmfenetre_afficher");
-gtk_widget_hide(cmfenetre_afficher);
-
-cmwindow3=lookup_widget(objet,"cmwindow3");
-cmwindow3=create_cmwindow3();
-gtk_widget_show(cmwindow3);
-
-}
-
-
+GtkWidget *input2;
+ GtkWidget *comboboxv;
+ GtkWidget *comboboxh;
+ GtkWidget *comboboxe;
+ GtkWidget *prix;
+ GtkWidget *resv;
+ GtkWidget *window1;
+GtkWidget *sortie;
+ 
 
 
-void
-cmon_button7_clicked                     (GtkWidget     *objet,
-                                        gpointer         user_data)
-{
-GtkWidget *cmwindow3;
-GtkWidget *cmfenetre_afficher;
+char Id[30];
 
-cmfenetre_afficher=lookup_widget(objet,"cmfenetre_afficher");
-cmwindow3=lookup_widget(objet,"cmwindow3");
-GtkWidget *input1,*input2,*input3,*input4,*input5 ;
-GtkWidget *cmcombobox2;
-char nom[100];
-char prenom[100];
-char date[100];
-char cin[100];
-char cid[100];
-char domaine[100];
+window1=lookup_widget(objet,"tbwindow1");
+
+
+prix=lookup_widget(objet, "tbspinbutton1");
+resv=lookup_widget(objet, "tbspinbutton3");
+
+sortie=lookup_widget(objet,"tblabel_7");
+
+comboboxv=lookup_widget(objet,"tbcomboboxv");
+comboboxh=lookup_widget(objet,"tbcomboboxh");
+comboboxe=lookup_widget(objet,"tbcomboboxe");
+input2=lookup_widget(objet,"tbentryi");
+ strcpy(Id,gtk_entry_get_text(GTK_ENTRY(input2)));
+ strcpy(p.id,gtk_entry_get_text(GTK_ENTRY(input2)));
 
 
 
+p.prix=gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (prix));
+p.resv=gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (resv));
 
 
-
-
-
-
-input1=lookup_widget(objet,"cmnnom");
-input2=lookup_widget(objet,"cmnprenom");
-input3=lookup_widget(objet,"cmndate");
-input4=lookup_widget(objet,"cmncin");
-input5=lookup_widget(objet,"cmnid");
-cmcombobox2=lookup_widget(objet,"cmcombobox2");
-strcpy(nom,gtk_entry_get_text(GTK_ENTRY(input1)));
-strcpy(prenom,gtk_entry_get_text(GTK_ENTRY(input2)));
-strcpy(date,gtk_entry_get_text(GTK_ENTRY(input3)));
-strcpy(cin,gtk_entry_get_text(GTK_ENTRY(input4)));
-strcpy(cid,gtk_entry_get_text(GTK_ENTRY(input5)));
-char cmdomaine[30];
-strcpy(domaine,gtk_combo_box_get_active_text(GTK_COMBO_BOX(cmcombobox2)));
-modifier_agent( nom, prenom, date, cin, cid,domaine);
+strcpy(p.ville,gtk_combo_box_get_active_text(GTK_COMBO_BOX(comboboxv)));
+strcpy(p.hotel,gtk_combo_box_get_active_text(GTK_COMBO_BOX(comboboxh)));
+strcpy(p.etoile,gtk_combo_box_get_active_text(GTK_COMBO_BOX(comboboxe)));
+supprimer1_heber(Id);
+ajouter_heber(p);
+gtk_label_set_text(GTK_LABEL(sortie),"modification réussite");
 
 
 }
 
 
-
 void
-cmon_button8_clicked                     (GtkWidget       *objet,
+tbon_afficher_v_clicked                  (GtkWidget       *objet,
                                         gpointer         user_data)
 {
-GtkWidget *cmwindow3;
-GtkWidget *cmfenetre_afficher;
-GtkWidget *cmtreeview1;
-cmfenetre_afficher=lookup_widget(objet,"cmfenetre_afficher");
-cmwindow3=lookup_widget(objet,"cmwindow3");
-gtk_widget_hide(cmwindow3);
+GtkWidget *window1;
+GtkWidget *window2;
+GtkWidget *treeview1;
 
+window1=lookup_widget(objet,"tbwindow1");
 
-cmfenetre_afficher=create_cmfenetre_afficher();
-gtk_widget_show(cmfenetre_afficher);
-cmtreeview1 =lookup_widget(cmfenetre_afficher,"cmtreeview1");
-afficher_agent(cmtreeview1);}
+gtk_widget_destroy(window1);
+window2=lookup_widget(objet,"tbwindow2");
+window2=create_tbwindow2();
 
+gtk_widget_show(window2);
 
-void
-cmon_button10_clicked                    (GtkWidget      *objet,
-                                        gpointer         user_data)
-{
-GtkWidget *cmwindow4;
-GtkWidget *chwindowsup;
-GtkWidget *chtreeview11;
-chwindowsup=lookup_widget(objet,"chwindowsup");
-cmwindow4=lookup_widget(objet,"cmwindow4");
+treeview1=lookup_widget(window2,"tbtreeview1");
 
-gtk_widget_hide(cmwindow4);
-chwindowsup=create_chwindowsup();
-gtk_widget_show(chwindowsup);
-chtreeview11 =lookup_widget(chwindowsup,"chtreeview11");
-affiche_client(chtreeview11);
-
-}
-
-
-void
-cmon_button9_clicked                     (GtkWidget       *objet,
-                                        gpointer         user_data)
-{
-GtkWidget *cmwindow4;
-GtkWidget *cmfenetre_ajout;
-cmfenetre_ajout=lookup_widget(objet,"cmfenetre_ajout");
-cmwindow4=lookup_widget(objet,"cmwindow4");
-gtk_widget_hide(cmwindow4);
-cmfenetre_ajout=create_cmfenetre_ajout();
-gtk_widget_show(cmfenetre_ajout);
-}
-
-/*
-void
-cmon_ajouter_clicked                   (GtkButton       *button,
-                                        gpointer         user_data)
-{
-
-}
-
-
-void
-cmon_afficher_clicked                  (GtkButton       *button,
-                                        gpointer         user_data)
-{
-
-}
-
-
-void
-cmon_supprimer_clicked                 (GtkButton       *button,
-                                        gpointer         user_data)
-{
-
-}
-
-
-void
-cmon_modifier_clicked                  (GtkButton       *button,
-                                        gpointer         user_data)
-{
-
-}
-
-
-void
-cmon_retour_clicked                    (GtkButton       *button,
-                                        gpointer         user_data)
-{
-
-}
-
-
-void
-cmon_button8_clicked                   (GtkButton       *button,
-                                        gpointer         user_data)
-{
-
-}
-
-
-void
-cmon_button7_clicked                   (GtkButton       *button,
-                                        gpointer         user_data)
-{
-
-}
-
-
-void
-cmon_button9_clicked                   (GtkButton       *button,
-                                        gpointer         user_data)
-{
-
-}
-
-
-void
-cmon_button10_clicked                  (GtkButton       *button,
-                                        gpointer         user_data)
-{
-
-}
-*/
-
-void
-on_cmbutton2_clicked                   (GtkWidget       *objet,
-                                        gpointer         user_data)
-{
-
-GtkWidget *cmwindow4;
-GtkWidget *cmfenetre_ajout;
-cmfenetre_ajout=lookup_widget(objet,"cmfenetre_ajout");
-cmwindow4=lookup_widget(objet,"cmwindow4");
-gtk_widget_hide(cmfenetre_ajout);
-
-
-cmwindow4=create_cmwindow4();
-gtk_widget_show(cmwindow4);
+afficher_heber(treeview1);
 }
 
 
 
+
 void
-on_chbutsup_clicked                    (GtkWidget       *objet,
+tbon_retour_clicked                      (GtkWidget       *objet,
+                                        gpointer         user_data)
+{
+GtkWidget *window1,*window2;
+
+window2=lookup_widget(objet,"tbwindow2");
+
+gtk_widget_destroy(window2);
+window1=create_tbwindow1();
+gtk_widget_show(window1);
+}
+
+
+
+
+
+void
+tbon_button_supprimer_clicked            (GtkWidget       *objet,
                                         gpointer         selection)
 {
 
-GtkWidget *chwindowsup;
-GtkWidget *chtreeview11;
-chwindowsup=lookup_widget(objet,"chwindowsup");
-chtreeview11 =lookup_widget(chwindowsup,"chtreeview11");
-supprimer1(chtreeview11);
+
+GtkWidget *window2;
+
+GtkWidget *treeview1;
+ 
+ 
+ window2=lookup_widget(objet,"tbwindow2");
+ 
+
+
+
+treeview1=lookup_widget(window2,"tbtreeview1");
+
+supprimer_heber(treeview1);
+
+
+
 }
+
+
+
 
 
 void
-on_chbutret_clicked                    (GtkWidget       *objet,
+tbon_buttonrch_clicked                   (GtkWidget       *objet,
                                         gpointer         user_data)
 {
-GtkWidget *cmwindow4;
-GtkWidget *chwindowsup;
-chwindowsup=lookup_widget(objet,"chwindowsup");
-cmwindow4=lookup_widget(objet,"cmwindow4");
-gtk_widget_hide(chwindowsup);
+GtkWidget *input;
+GtkWidget *output1; 
+GtkWidget *output2; 
+GtkWidget *output3;
+GtkWidget *output4; 
+GtkWidget *output5;
+GtkWidget *output6;
+GtkWidget *window1;
+heber p;
+char ide[100];
+char hotel[100];
+char ville[100];
+char etoile[100];
+char prix[100];
+char id[100];
+char resv[100];
+window1=lookup_widget(objet,"tbwindow1");
+input=lookup_widget(objet,"tbentry1998");
+output1=lookup_widget(objet,"tbentry2005");
+output2=lookup_widget(objet,"tbentry2006");
+output3=lookup_widget(objet,"tbentry2007");
+output4=lookup_widget(objet,"tbentry2008");
+output5=lookup_widget(objet,"tbentry2009");
+output6=lookup_widget(objet,"tbentry2010");
 
+strcpy(ide,gtk_entry_get_text(GTK_ENTRY(input)));
 
-cmwindow4=create_cmwindow4();
-gtk_widget_show(cmwindow4);
+FILE *f;
+  f=fopen("heber.txt","r"); 
+   if (f!=NULL)
+   {
+    while (fscanf(f,"%s %s %s %s %s %s  \n",hotel,ville,etoile,prix,id,resv)!=EOF)
+    {
+   if (strcmp(id,ide)==0)
+   {
+     
+     gtk_entry_set_text (GTK_ENTRY (output1), ville);
+     gtk_entry_set_text (GTK_ENTRY (output2), hotel);
+     gtk_entry_set_text (GTK_ENTRY (output3), etoile);
+     gtk_entry_set_text (GTK_ENTRY (output4), prix);
+     gtk_entry_set_text (GTK_ENTRY (output5), id);
+     gtk_entry_set_text (GTK_ENTRY (output6), resv);
 }
+}
+}
+
+
+
+
+}
+
+
+
+
+
+
 
 

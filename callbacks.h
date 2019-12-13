@@ -2,87 +2,33 @@
 
 
 void
-cmon_ajouter_clicked                     (GtkWidget      *objet,
+tbon_ajouter_v_clicked                   (GtkWidget       *objet_graphique,
                                         gpointer         user_data);
 
 void
-cmon_afficher_clicked                    (GtkWidget       *objet,
+tbon_modifier_v_clicked                  (GtkWidget       *objet,
                                         gpointer         user_data);
 
 void
-cmon_retour_clicked                      (GtkWidget       *objet,
+tbon_afficher_v_clicked                  (GtkWidget       *objet,
                                         gpointer         user_data);
 
 void
-cmon_supprimer_clicked                   (GtkWidget       *objet,
+tbon_retour_clicked                      (GtkWidget       *objet,
+                                        gpointer         user_data);
+
+void
+tbon_button_supprimer_clicked            (GtkWidget       *objet,
                                         gpointer         selection);
 
 void
-cmon_modifier_clicked                    (GtkWidget       *objet,
+tbon_buttonrch_clicked                   (GtkWidget       *objet,
                                         gpointer         user_data);
 
 
 
-void
-cmon_button7_clicked                     (GtkWidget       *objet,
-                                        gpointer         user_data);
+                      
 
-void
-cmon_button8_clicked                     (GtkWidget       *objet,
-                                        gpointer         user_data);
 
-void
-cmon_button10_clicked                    (GtkWidget      *objet,
-                                        gpointer         user_data);
 
-void
-cmon_button9_clicked                     (GtkWidget       *objet,
-                                        gpointer         user_data);
-/*
-void
-cmon_ajouter_clicked                   (GtkButton       *button,
-                                        gpointer         user_data);
 
-void
-cmon_afficher_clicked                  (GtkButton       *button,
-                                        gpointer         user_data);
-
-void
-cmon_supprimer_clicked                 (GtkButton       *button,
-                                        gpointer         user_data);
-
-void
-cmon_modifier_clicked                  (GtkButton       *button,
-                                        gpointer         user_data);
-
-void
-cmon_retour_clicked                    (GtkButton       *button,
-                                        gpointer         user_data);
-
-void
-cmon_button8_clicked                   (GtkButton       *button,
-                                        gpointer         user_data);
-
-void
-cmon_button7_clicked                   (GtkButton       *button,
-                                        gpointer         user_data);
-
-void
-cmon_button9_clicked                   (GtkButton       *button,
-                                        gpointer         user_data);
-
-void
-cmon_button10_clicked                  (GtkButton       *button,
-                                        gpointer         user_data);*/
-
-void
-on_cmbutton2_clicked                   (GtkWidget       *objet,
-                                        gpointer         user_data);
-
-void
-on_chbutsup_clicked                    (GtkWidget       *objet,
-                                        gpointer        selection);
-
-void
-on_chbutret_clicked                    (GtkWidget       *objet,
-                                        gpointer         user_data);
